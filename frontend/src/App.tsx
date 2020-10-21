@@ -1,26 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import emotionReset from 'emotion-reset'
+import { Global, css } from '@emotion/core'
+/** @jsx jsx */
+import { jsx } from '@emotion/core'
+import { ThemeProvider } from 'emotion-theming'
+
+const theme = {
+  colors: {
+    primary: 'hotpink'
+  }
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <ThemeProvider theme={theme}>
+      <div>
+        <Global
+          styles={css`
+            ${emotionReset}
+
+            *, *::after, *::before {
+              box-sizing: border-box;
+              -moz-osx-font-smoothing: grayscale;
+              -webkit-font-smoothing: antialiased;
+            }
+          `}
+        />
+        <div css={(theme) => ({ 
+          color: theme.colors.primary,
+          margin: '10px',
+          padding: '20px',
+          border: '2px solid hotpink',
+          borderRadius: '5px',
+          fontSize: '20px',
+          textAlign: 'center'
+        })}>
+          <span>Lynx</span>
+        </div>
+      </div>
+    </ThemeProvider>
+  )
 }
 
-export default App;
+export default App
